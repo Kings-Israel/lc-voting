@@ -7391,7 +7391,7 @@ select {
 }
 
 .max-w-custom {
-  max-width: 62.5rem;
+  max-width: 68.5rem;
 }
 
 .flex-1 {
@@ -31770,7 +31770,7 @@ select {
   }
 
   .sm\:max-w-custom {
-    max-width: 62.5rem;
+    max-width: 68.5rem;
   }
 
   .sm\:flex-1 {
@@ -56011,7 +56011,7 @@ select {
   }
 
   .md\:max-w-custom {
-    max-width: 62.5rem;
+    max-width: 68.5rem;
   }
 
   .md\:flex-1 {
@@ -80252,7 +80252,7 @@ select {
   }
 
   .lg\:max-w-custom {
-    max-width: 62.5rem;
+    max-width: 68.5rem;
   }
 
   .lg\:flex-1 {
@@ -104493,7 +104493,7 @@ select {
   }
 
   .xl\:max-w-custom {
-    max-width: 62.5rem;
+    max-width: 68.5rem;
   }
 
   .xl\:flex-1 {
@@ -128734,7 +128734,7 @@ select {
   }
 
   .\32xl\:max-w-custom {
-    max-width: 62.5rem;
+    max-width: 68.5rem;
   }
 
   .\32xl\:flex-1 {
