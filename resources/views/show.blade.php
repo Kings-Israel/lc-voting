@@ -34,11 +34,16 @@
                         <div>&bull;</div>
                         <div class="text-gray-900">3 Comments</div>
                     </div>
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
                         <div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>
                         <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3">
-                            <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                            <ul class="hidden absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left ml-8">
+                            <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" @click="isOpen = !isOpen">
+                            <ul 
+                                x-cloak
+                                x-show.transition.origin.top.left.duration.150ms="isOpen"
+                                @click.away="isOpen = false"
+                                @keydown.escape.window = "isOpen = false"
+                                class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left ml-8">
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Post</a></li>
                             </ul>
@@ -52,11 +57,16 @@
 
     <div class="button-container flex items-center justify-between">
         <div class="flex items-center space-x-4 ml-6">
-            <div class="relative">
-                <button type="button" class="bg-blue flex items-center justify-center w-32 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
+            <div x-data="{ isOpen: false }" class="relative">
+                <button type="button" @click="isOpen = !isOpen" class="bg-blue flex items-center justify-center w-32 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
                     <span>Reply</span>
                 </button>
-                <div class="absolute z-10 w-104 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
+                <div
+                    x-cloak
+                    x-show.transition.origin.top.left.duration.150ms="isOpen"
+                    @click.away="isOpen = false"
+                    @keydown.escape.window = "isOpen = false" 
+                    class="absolute z-10 w-104 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
                     <form action="" class="space-y-4 px-4 py-6">
                         <div>
                             <textarea name="post_comment" id="" cols="30" rows="4" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Go Ahead, share your thoughts"></textarea>
@@ -75,14 +85,19 @@
                     </form>
                 </div>
             </div>
-            <div class="relative">
-                <button type="button" class="flex items-center justify-center w-36 h-11 text-sm bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3">
+            <div x-data="{ isOpen: false }" class="relative">
+                <button type="button" @click="isOpen = !isOpen" class="flex items-center justify-center w-36 h-11 text-sm bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3">
                     <span>Set Status</span>
                     <svg class="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                       </svg>
                 </button>
-                <div class="absolute z-20 w-76 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
+                <div 
+                    x-cloak
+                    x-show.transition.origin.top.left.duration.150ms="isOpen"
+                    @click.away="isOpen = false"
+                    @keydown.escape.window = "isOpen = false"
+                    class="absolute z-20 w-76 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
                     <form action="" class="space-y-4 px-4 py-6">
                         <div class="space-y-2">
                             <div>
@@ -174,10 +189,16 @@
                             <div>&bull;</div>
                             <div>10 hours ago</div>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                            <div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>
                             <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3">
-                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                                <ul class="hidden absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left ml-8">
+                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" @click="isOpen = !isOpen">
+                                <ul 
+                                    x-cloak
+                                    x-show.transition.origin.top.left.duration.150ms="isOpen"
+                                    @click.away="isOpen = false"
+                                    @keydown.escape.window = "isOpen = false"
+                                    class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 text-left ml-8">
                                     <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
                                     <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Post</a></li>
                                 </ul>
@@ -211,10 +232,16 @@
                             <div>&bull;</div>
                             <div>10 hours ago</div>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                            <div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>
                             <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3">
-                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                                <ul class="hidden absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left ml-8">
+                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" @click="isOpen = !isOpen">
+                                <ul 
+                                    x-cloak
+                                    x-show.transition.origin.top.left.duration.150ms="isOpen"
+                                    @click.away="isOpen = false"
+                                    @keydown.escape.window = "isOpen = false"
+                                    class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 text-left ml-8">
                                     <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
                                     <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Post</a></li>
                                 </ul>
