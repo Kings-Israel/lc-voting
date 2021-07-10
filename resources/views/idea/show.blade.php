@@ -17,18 +17,18 @@
             </div>
             <div class="mx-2 w-full">
                 <h4 class="text-xl font-semibold">
-                    <a href="#" class="hover:underline">A random title</a>
+                    <a href="#" class="hover:underline">{{ $idea->title }}</a>
                 </h4>
 
                 <div class="text-gray-600 mt-3">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, culpa maxime dicta et dolore ab facere maiores eveniet repellendus consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex odio earum alias cupiditate quae distinctio. Quibusdam nemo dolor exercitationem distinctio.
+                    {{ $idea->description }}
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-center justify-between mt-6">
                     <div class="flex md:items-center text-xs text-gray-400 font-semibold md:space-x-2">
-                        <div class="font-bold text-gray-900 hidden md:block">John Doe</div>
+                        <div class="font-bold text-gray-900 hidden md:block">{{ $idea->user->name }}</div>
                         <div class="hidden md:block">&bull;</div>
-                        <div>10 hours ago</div>
+                        <div>{{ $idea->created_at->diffForHumans() }}</div>
                         <div>&bull;</div>
                         <div>Category 1</div>
                         <div>&bull;</div>
@@ -38,7 +38,7 @@
                         <div class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">Open</div>
                         <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
                             <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                            <ul 
+                            <ul
                                 x-cloak
                                 x-show.transition.origin.top.left.duration.150ms="isOpen"
                                 @click.away="isOpen = false"
@@ -73,7 +73,7 @@
                     x-cloak
                     x-show.transition.origin.top.left.duration.150ms="isOpen"
                     @click.away="isOpen = false"
-                    @keydown.escape.window = "isOpen = false" 
+                    @keydown.escape.window = "isOpen = false"
                     class="absolute z-10 w-64 md:w-104 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
                     <form action="" class="space-y-4 px-4 py-6">
                         <div>
@@ -100,7 +100,7 @@
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                       </svg>
                 </button>
-                <div 
+                <div
                     x-cloak
                     x-show.transition.origin.top.left.duration.150ms="isOpen"
                     @click.away="isOpen = false"
@@ -186,11 +186,11 @@
                     {{-- <h4 class="text-xl font-semibold">
                         <a href="#" class="hover:underline">A random title</a>
                     </h4> --}}
-    
+
                     <div class="text-gray-600 mt-3">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, culpa maxime dicta et dolore ab facere maiores eveniet repellendus consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </div>
-    
+
                     <div class="flex items-center justify-between mt-6">
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
                             <div class="font-bold text-gray-900">John Doe</div>
@@ -200,7 +200,7 @@
                         <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
                             <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
                                 <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" >
-                                <ul 
+                                <ul
                                     x-cloak
                                     x-show.transition.origin.top.left.duration.150ms="isOpen"
                                     @click.away="isOpen = false"
@@ -213,7 +213,7 @@
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>{{-- End Comment Container --}}
         <div class="comment-container relative is-admin bg-white rounded-xl mt-1 flex">
@@ -228,11 +228,11 @@
                     <h4 class="text-xl font-semibold">
                         <a href="#" class="hover:underline">Status Changed to Under Construction</a>
                     </h4>
-    
+
                     <div class="text-gray-600 mt-3">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, culpa maxime dicta et dolore ab facere maiores eveniet repellendus consectetur.
                     </div>
-    
+
                     <div class="flex items-center justify-between mt-6">
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
                             <div class="font-bold text-blue">Andrea</div>
@@ -242,7 +242,7 @@
                         <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
                             <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
                                 <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                                <ul 
+                                <ul
                                     x-cloak
                                     x-show.transition.origin.top.left.duration.150ms="isOpen"
                                     @click.away="isOpen = false"
@@ -255,7 +255,7 @@
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>{{-- End Comment Container --}}
         <div class="comment-container relative bg-white rounded-xl mt-1 flex">
@@ -269,11 +269,11 @@
                     {{-- <h4 class="text-xl font-semibold">
                         <a href="#" class="hover:underline">A random title</a>
                     </h4> --}}
-    
+
                     <div class="text-gray-600 mt-3">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, culpa maxime dicta et dolore ab facere maiores eveniet repellendus consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </div>
-    
+
                     <div class="flex items-center justify-between mt-6">
                         <div class="flex items-center text-xs text-gray-400 font-semibold space-x-2">
                             <div class="font-bold text-gray-900">John Doe</div>
@@ -291,7 +291,7 @@
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>{{-- End Comment Container --}}
     </div>{{-- End Comments Container --}}
