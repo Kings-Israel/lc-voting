@@ -28,7 +28,7 @@ class ShowIdeasTest extends TestCase
 
         // $response->assertSuccessful();
         $response->assertSee($ideaOne->title);
-        $response->assertSee(($ideaTwo->description));
+        $response->assertSee($ideaTwo->description);
     }
 
     /** @test */
@@ -40,7 +40,7 @@ class ShowIdeasTest extends TestCase
         ]);
         $response = $this->get(route('idea.show', $ideaOne));
 
-        $response->assertSuccessful();
+        $response->assertStatus(200);
         $response->assertSee($ideaOne->title);
     }
 
