@@ -42,4 +42,14 @@ class Idea extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Get the status that owns the Idea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
