@@ -1,11 +1,11 @@
 <div>
     <div class="filters flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
         <div class="w-full md:w-1/3">
-            <select name="category" id="category" class="w-full rounded-xl px-4 py-2 border-none">
-                <option value="Category One" id="">Category One</option>
-                <option value="Category Two" id="">Category Two</option>
-                <option value="Category Three" id="">Category Three</option>
-                <option value="Category Four" id="">Category Four</option>
+            <select wire:model="category" name="category" id="category" class="w-full rounded-xl px-4 py-2 border-none">
+                <option value="All Categories" id="">All Categories</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->name }}" id="">{{ $category->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="w-full md:w-1/3">
@@ -33,6 +33,7 @@
     </div> {{-- End Ideas container --}}
 
     <div class="my-8">
-        {{ $ideas->links() }}
+        {{-- {{ $ideas->links() }} --}}
+        {{ $ideas->appends(request()->query())->links() }}
     </div>
 </div>
