@@ -2,8 +2,7 @@
     x-data
     @click="
         const clicked = $event.target
-        console.log($event)
-
+        
         const target = clicked.tagName.toLowerCase()
 
         const ignores = ['button', 'svg', 'img', 'a']
