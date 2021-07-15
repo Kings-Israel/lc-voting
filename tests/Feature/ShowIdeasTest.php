@@ -87,6 +87,8 @@ class ShowIdeasTest extends TestCase
     /** @test */
     public function ideas_pagination_works()
     {
+        $user = User::factory()->create();
+
         $categoryOne = Category::factory()->create([
             'name' => 'Category One'
         ]);
@@ -94,6 +96,7 @@ class ShowIdeasTest extends TestCase
         $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
 
         Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
+            'user_id' => $user->id,
             'category_id' => $categoryOne->id,
             'status_id' => $statusOpen->id,
         ]);
@@ -122,7 +125,7 @@ class ShowIdeasTest extends TestCase
     public function same_idea_different_slugs()
     {
         $user = User::factory()->create();
-        
+
         $categoryOne =
         Category::factory()->create([
             'name' => 'Category One'
@@ -142,17 +145,18 @@ class ShowIdeasTest extends TestCase
             'user_id' => $user->id,
             'title' => 'My First Idea',
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'description' => 'Description for another idea'
         ]);
 
         $response = $this->get(route('idea.show', $ideaOne));
 
-        // $response->assertSuccessful();
+        $response->assertSuccessful();
         $this->assertTrue(request()->path() === 'ideas/my-first-idea');
 
         $response = $this->get(route('idea.show', $ideaTwo));
 
-        // $response->assertSuccessful();
+        $response->assertSuccessful();
         $this->assertTrue(request()->path() === 'ideas/my-first-idea-2');
     }
 }

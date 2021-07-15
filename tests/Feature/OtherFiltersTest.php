@@ -4,12 +4,16 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\IdeasIndex;
 use App\Models\Vote;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Status;
+use App\Models\Idea;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class CategoryFiltersTest extends TestCase
+class OtherFiltersTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -108,7 +112,7 @@ class CategoryFiltersTest extends TestCase
             ->test(IdeasIndex::class)
             ->set('filter', 'My Ideas')
             ->assertViewHas('ideas', function($ideas) {
-                return $ideas->count() === 2 && $ideas->first()->title === 'My First Idea' && $ideas->get(1)->title === 'My Second Idea';
+                return $ideas->count() === 2 && $ideas->first()->title === 'My Second Idea' && $ideas->get(1)->title === 'My First Idea';
             });
     }
 
@@ -169,7 +173,7 @@ class CategoryFiltersTest extends TestCase
         $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
         $statusClosed = Status::factory()->create(['name' => 'Closed', 'classes' => 'bg-red text-white']);
 
-        $ideaOne = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryOne->id,
             'status_id' => $statusOpen->id,
@@ -177,7 +181,7 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        $ideaTwo = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryOne->id,
             'status_id' => $statusOpen->id,
@@ -185,7 +189,7 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        $ideaThree = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryTwo->id,
             'status_id' => $statusOpen->id,
@@ -196,7 +200,7 @@ class CategoryFiltersTest extends TestCase
         Livewire::actingAs($user)
             ->test(IdeasIndex::class)
             ->set('filter', 'My Ideas')
-            ->set('category', 'Caetgory 1')
+            ->set('category', 'Category 1')
             ->assertViewHas('ideas', function($ideas) {
                 return $ideas->count() === 2 && $ideas->first()->title === 'My Second Idea' && $ideas->get(1)->title === 'My First Idea';
             });

@@ -11,6 +11,7 @@ class CreateIdea extends Component
 {
     public $title;
     public $category = 1;
+    public $status;
     public $description;
 
     protected $rules = [

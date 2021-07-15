@@ -4,6 +4,10 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\IdeasIndex;
 use App\Models\Vote;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Idea;
+use App\Models\Status;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;

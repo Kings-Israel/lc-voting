@@ -229,7 +229,7 @@ class VoteIndexPageTest extends TestCase
         ])
         ->call('vote')
         ->assertSet('votesCount', 4)
-        ->assertSet('hasVoted', true)
+        ->assertSet('hasVoted', false)
         ->assertSee('Vote')
         ->assertDontSee('Voted');
     }

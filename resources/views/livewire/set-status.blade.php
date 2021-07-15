@@ -23,27 +23,27 @@
             <div class="space-y-2">
                 <div>
                     <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" checked="" class="bg-gray-200 text-gray border-none" name="status" id="" value="1">
+                    <input wire:model="status" type="radio" class="bg-gray-200 text-gray border-none" name="status" value="1">
                     <span class="ml-2">Open</span>
                 </div>
                 <div>
                     <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-purple border-none" id="" value="2">
+                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-purple border-none" value="2">
                     <span class="ml-2">Considering</span>
                 </div>
                 <div>
                     <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-yellow border-none" id="" value="3">
-                    <span class="ml-2">In Progess</span>
-                </div>
-                <div>
-                    <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-green border-none" id="" value="4">
+                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-green border-none" value="3">
                     <span class="ml-2">Implemented</span>
                 </div>
                 <div>
                     <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-red border-none" id="" value="5">
+                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-yellow border-none" value="4">
+                    <span class="ml-2">In Progess</span>
+                </div>
+                <div>
+                    <label for="" class="inline-flex items-center"></label>
+                    <input wire:model="status" type="radio" name="status" class="bg-gray-200 text-red border-none" value="5">
                     <span class="ml-2">Closed</span>
                 </div>
             </div>

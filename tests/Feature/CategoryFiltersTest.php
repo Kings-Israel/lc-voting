@@ -3,6 +3,10 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\IdeasIndex;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Status;
+use App\Models\Idea;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -25,7 +29,7 @@ class CategoryFiltersTest extends TestCase
         $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
         $statusClosed = Status::factory()->create(['name' => 'Closed', 'classes' => 'bg-red text-white']);
 
-        $ideaOne = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryOne->id,
             'status_id' => $statusConsidering->id,
@@ -33,7 +37,7 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        $ideaTwo = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryOne->id,
             'status_id' => $statusConsidering->id,
@@ -41,7 +45,7 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        $ideaThree = Idea::factory()->create([
+        Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryTwo->id,
             'status_id' => $statusInProgress->id,
@@ -52,7 +56,7 @@ class CategoryFiltersTest extends TestCase
         Livewire::test(IdeasIndex::class)
             ->set('category', 'Category 1')
             ->assertViewHas('ideas', function($ideas) {
-                return $ideas->count() === 1 && $ideas->first()->category->name === 'Category 1';
+                return $ideas->count() === 2 && $ideas->first()->category->name === 'Category 1';
             });
     }
 
@@ -93,11 +97,11 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        Livewire::withQueryStringParams(['category' => 'Category 1'])
+        Livewire::withQueryParams(['category' => 'Category 1'])
             ->test(IdeasIndex::class)
             ->set('category', 'Category 1')
             ->assertViewHas('ideas', function($ideas) {
-                return $ideas->count() === 1 && $ideas->first()->category->name === 'Category 1';
+                return $ideas->count() === 2 && $ideas->first()->category->name === 'Category 1';
             });
     }
 
@@ -169,7 +173,7 @@ class CategoryFiltersTest extends TestCase
         $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
             'category_id' => $categoryOne->id,
-            'status_id' => $statusConsidering->id,
+            'status_id' => $statusOpen->id,
             'title' => 'My First Idea',
             'description' => 'Description for my first idea'
         ]);
@@ -190,7 +194,7 @@ class CategoryFiltersTest extends TestCase
             'description' => 'Description for my first idea'
         ]);
 
-        Livewire::withQueryStringParams(['status' => 'Open', 'category' => 'Category 1'])
+        Livewire::withQueryParams(['status' => 'Open', 'category' => 'Category 1'])
             ->test(IdeasIndex::class)
             ->assertViewHas('ideas', function($ideas) {
                 return $ideas->count() === 1 && $ideas->first()->category->name === 'Category 1' && $ideas->first()->status->name === 'Open';
