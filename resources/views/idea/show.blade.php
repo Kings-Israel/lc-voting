@@ -1,10 +1,10 @@
 <x-app-layout>
     <div>
-        <a href="/" class="flex items-center font-semibold hover:underline">
+        <a href="{{ $backUrl }}" class="flex items-center font-semibold hover:underline">
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
-            <span class="ml-2">All Ideas</span>
+            <span class="ml-2">All Ideas (or back to chosen category with filters)</span>
         </a>
     </div>
 
@@ -19,9 +19,6 @@
                     </a>
                 </div>
                 <div class="md:mx-4 w-full">
-                    {{-- <h4 class="text-xl font-semibold">
-                        <a href="#" class="hover:underline">A random title</a>
-                    </h4> --}}
 
                     <div class="text-gray-600 mt-3">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, culpa maxime dicta et dolore ab facere maiores eveniet repellendus consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit.
