@@ -23,7 +23,7 @@
             <div class="space-y-2">
                 <div>
                     <label for="" class="inline-flex items-center"></label>
-                    <input wire:model="status" type="radio" class="bg-gray-200 text-gray border-none" name="status" value="1">
+                    <input wire:model="status" type="radio" class="bg-gray-200 text-gray-400 border-none" name="status" value="1">
                     <span class="ml-2">Open</span>
                 </div>
                 <div>
@@ -59,14 +59,14 @@
                       </svg>
                     <span class="ml-1">Attach</span>
                 </button>
-                <button type="submit" class="bg-blue flex items-center justify-center w-1/2 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
+                <button type="submit" class="bg-blue flex items-center justify-center w-1/2 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white disabled:opacity-50">
                     <span>Update</span>
                 </button>
             </div>
 
             <div>
                 <label for="" class="font-normal inline-flex items-center">
-                    <input type="checkbox" name="notify_voters" id="" class="bg-gray-200 rounded" checked="">
+                    <input wire:model="notifyAllVoters" type="checkbox" name="notify_voters" class="bg-gray-200 rounded">
                     <span class="ml-1">Notify All Voters</span>
                 </label>
             </div>
