@@ -74,6 +74,7 @@ class CreateIdeaTest extends TestCase
         $response->assertSee('This is a test for my first idea');
 
         $this->assertDatabaseHas('ideas', ['title' => 'My First Idea']);
+        $this->assertDatabaseHas('votes', ['idea_id' => 1, 'user_id' => 1]);
     }
 
     public function test_creating_two_ideas_with_same_title_still_works_but_have_different_slugs()

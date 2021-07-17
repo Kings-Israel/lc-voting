@@ -24,22 +24,11 @@ class VoteIndexPageTest extends TestCase
      */
     public function test_index_page_contains_idea_index_livewire_component()
     {
-        $user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
-        ]);
+        Idea::factory()->create();
 
         $response = $this->get(route('idea.index'));
-        $response->assertSee('idea-index');
+        $response->assertSeeLivewire('idea-index');
     }
 
     public function test_ideas_index_livewire_correctly_recieves_votes_count()
@@ -47,17 +36,7 @@ class VoteIndexPageTest extends TestCase
         $user = User::factory()->create();
         $userb = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
-        ]);
+        $idea = Idea::factory()->create();
 
         Vote::factory()->create([
             'idea_id' => $idea->id,
@@ -73,29 +52,11 @@ class VoteIndexPageTest extends TestCase
             ->assertViewHas('ideas', function($ideas) {
                 return $ideas->first()->votes_count == 2;
             });
-
-        // $response = $this->get(route('idea.index'));
-        // $response->assertViewHas('ideas', function($ideas) {
-        //     return $ideas->first()->votes_count == 2;
-        // });
     }
 
     public function test_votes_count_shows_correctly_on_index_page_livewire_component()
     {
-        $user = User::factory()->create();
-
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
-        ]);
-
+        $idea = Idea::factory()->create();
 
         Livewire::test(IdeaIndex::class, [
             'idea' => $idea,
@@ -110,16 +71,8 @@ class VoteIndexPageTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
         $idea = Idea::factory()->create([
             'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
         ]);
 
         Vote::factory()->create([
@@ -142,18 +95,9 @@ class VoteIndexPageTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
         $idea = Idea::factory()->create([
             'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
         ]);
-
 
         Livewire::test(IdeaIndex::class, [
             'idea' => $idea,
@@ -167,16 +111,8 @@ class VoteIndexPageTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
         $idea = Idea::factory()->create([
             'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
         ]);
 
         $this->assertDatabaseMissing('votes', [
@@ -203,16 +139,8 @@ class VoteIndexPageTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-
         $idea = Idea::factory()->create([
             'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea'
         ]);
 
         Vote::factory()->create([
