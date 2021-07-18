@@ -27,18 +27,21 @@
                     </div>
                     <div class="flex mt-4 md:mt-0 items-center space-x-2" x-data="{ isOpen: false }">
                         <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
-                        <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
-                            <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
+                        <div class="relative">
+                            <button class="bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
+                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
+                            </button>
                             <ul
                                 x-cloak
                                 x-show.transition.origin.top.left.duration.150ms="isOpen"
                                 @click.away="isOpen = false"
                                 @keydown.escape.window = "isOpen = false"
                                 class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
+                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Edit Idea</a></li>
+                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Idea</a></li>
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
-                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Post</a></li>
                             </ul>
-                        </button>
+                        </div>
                     </div>
 
                     <div class="flex items-center md:hidden mt-4 md:mt-0 md">
