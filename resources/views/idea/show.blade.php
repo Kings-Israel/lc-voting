@@ -10,7 +10,9 @@
 
     <livewire:idea-show :idea="$idea" :votesCount="$votesCount"  />
 
-    <livewire:edit-idea />
+    @can('udpate', $idea)
+        <livewire:edit-idea :idea="$idea" />
+    @endcan
 
     <div class="comments-container relative space-y-6 pt-4 md:ml-22 my-8 mt-1">
         @foreach (range(1, 3) as $comment)
