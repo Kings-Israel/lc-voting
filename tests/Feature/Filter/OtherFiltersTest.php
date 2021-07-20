@@ -120,4 +120,37 @@ class OtherFiltersTest extends TestCase
                 return $ideas->count() === 2 && $ideas->first()->title === 'My Second Idea' && $ideas->get(1)->title === 'My First Idea';
             });
     }
+
+    public function test_spam_filter_works()
+    {
+        $user = User::factory()->create();
+
+        Idea::factory()->create([
+            'title' => 'My First Idea',
+            'spam_reports' => 1,
+        ]);
+
+        Idea::factory()->create([
+            'title' => 'My Second Idea',
+            'spam_reports' => 2,
+        ]);
+
+        Idea::factory()->create([
+            'title' => 'My Third Idea',
+            'spam_reports' => 3,
+        ]);
+
+        Idea::factory()->create();
+
+        Livewire::actingAs($user)
+            ->test(IdeasIndex::class)
+            ->set('filter', 'Spam Ideas')
+            ->assertViewHas('ideas', function($ideas) {
+                return $ideas->count() === 3
+                    && $ideas->first()->title = 'My Third Idea'
+                    && $ideas->get(1)->title = 'My Second Idea'
+                    && $ideas->get(2)->title = 'My Third Idea';
+            });
+
+    }
 }
