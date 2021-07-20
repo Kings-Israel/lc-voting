@@ -10,8 +10,12 @@
 
     <livewire:idea-show :idea="$idea" :votesCount="$votesCount"  />
 
-    @can('udpate', $idea)
+    @can('update', $idea)
         <livewire:edit-idea :idea="$idea" />
+    @endcan
+
+    @can('delete', $idea)
+        <livewire:delete-idea :idea="$idea" />
     @endcan
 
     <div class="comments-container relative space-y-6 pt-4 md:ml-22 my-8 mt-1">
@@ -41,7 +45,6 @@
                                     <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
                                         <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" >
                                     </button>
-                                </div>
                                     <ul
                                         x-cloak
                                         x-show.transition.origin.top.left.duration.150ms="isOpen"
@@ -51,6 +54,7 @@
                                         <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
                                         <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Comment</a></li>
                                     </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

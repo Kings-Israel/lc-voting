@@ -37,10 +37,10 @@
                                 @click.away="isOpen = false"
                                 @keydown.escape.window = "isOpen = false"
                                 class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
-                                @can('udpate', $idea)
+                                @can('update', $idea)
                                     <li>
                                         <a
-                                            @click="
+                                            @click.prevent="
                                                 isOpen = false
                                                 $dispatch('custom-show-edit-modal')
                                             "
@@ -50,7 +50,20 @@
                                         </a>
                                     </li>
                                 @endcan
-                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Delete Idea</a></li>
+                                
+                                @can('delete', $idea)
+                                    <li>
+                                        <a
+                                            @click.prevent="
+                                                isOpen = false
+                                                $dispatch('custom-show-delete-idea-modal')
+                                            "
+                                            href="#"
+                                            class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                            Delete Idea
+                                        </a>
+                                    </li>
+                                @endcan
                                 <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
                             </ul>
                         </div>
