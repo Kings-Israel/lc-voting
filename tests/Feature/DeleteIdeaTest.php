@@ -47,7 +47,7 @@ class DeleteIdeaTest extends TestCase
         $idea = Idea::factory()->create();
         $this->actingAs($user)
             ->get(route('idea.show', $idea))
-            ->assertSeeDontLivewire('delete-idea');
+            ->assertDontSeeLivewire('delete-idea');
     }
 
     public function test_deleting_an_idea_works_when_user_has_authorization()

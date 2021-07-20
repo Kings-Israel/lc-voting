@@ -11,6 +11,12 @@
                     {{ $idea->title }}
                 </h4>
 
+                @admin
+                    @if ($idea->spam_reports > 0)
+                        <div class="text-red mb-2">Spam Reports: {{ $idea->spam_reports }}</div>
+                    @endif
+                @endadmin
+
                 <div class="text-gray-600 mt-3">
                     {{ $idea->description }}
                 </div>
@@ -27,46 +33,73 @@
                     </div>
                     <div class="flex mt-4 md:mt-0 items-center space-x-2" x-data="{ isOpen: false }">
                         <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
-                        <div class="relative">
-                            <button class="bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
-                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
-                            </button>
-                            <ul
-                                x-cloak
-                                x-show.transition.origin.top.left.duration.150ms="isOpen"
-                                @click.away="isOpen = false"
-                                @keydown.escape.window = "isOpen = false"
-                                class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
-                                @can('update', $idea)
+                        @auth
+
+                            <div class="relative">
+                                <button class="bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
+                                    <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="">
+                                </button>
+                                <ul
+                                    x-cloak
+                                    x-show.transition.origin.top.left.duration.150ms="isOpen"
+                                    @click.away="isOpen = false"
+                                    @keydown.escape.window = "isOpen = false"
+                                    class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 text-left z-10 md:ml-8 top-8 md:top-6 right-0 md:left-0">
+                                    @can('update', $idea)
+                                        <li>
+                                            <a
+                                                @click.prevent="
+                                                    isOpen = false
+                                                    $dispatch('custom-show-edit-modal')
+                                                "
+                                                href="#"
+                                                class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                                Edit Idea
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                    @can('delete', $idea)
+                                        <li>
+                                            <a
+                                                @click.prevent="
+                                                    isOpen = false
+                                                    $dispatch('custom-show-delete-idea-modal')
+                                                "
+                                                href="#"
+                                                class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                                Delete Idea
+                                            </a>
+                                        </li>
+                                    @endcan
                                     <li>
                                         <a
                                             @click.prevent="
                                                 isOpen = false
-                                                $dispatch('custom-show-edit-modal')
+                                                $dispatch('custom-show-mark-idea-as-spam-modal')
                                             "
                                             href="#"
                                             class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                            Edit Idea
+                                            Mark As Spam
                                         </a>
                                     </li>
-                                @endcan
-                                
-                                @can('delete', $idea)
-                                    <li>
-                                        <a
-                                            @click.prevent="
-                                                isOpen = false
-                                                $dispatch('custom-show-delete-idea-modal')
-                                            "
-                                            href="#"
-                                            class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                            Delete Idea
-                                        </a>
-                                    </li>
-                                @endcan
-                                <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
-                            </ul>
-                        </div>
+
+                                    @if ($idea->spam_reports > 0)
+                                        <li>
+                                            <a
+                                                @click.prevent="
+                                                    isOpen = false
+                                                    $dispatch('custom-show-mark-idea-as-not-spam-modal')
+                                                "
+                                                href="#"
+                                                class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                                Mark As NOT Spam
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endauth
                     </div>
 
                     <div class="flex items-center md:hidden mt-4 md:mt-0 md">
@@ -92,29 +125,31 @@
                 <button type="button" @click="isOpen = !isOpen" class="bg-blue flex items-center justify-center w-32 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
                     <span>Reply</span>
                 </button>
-                <div
-                    x-cloak
-                    x-show.transition.origin.top.left.duration.150ms="isOpen"
-                    @click.away="isOpen = false"
-                    @keydown.escape.window = "isOpen = false"
-                    class="absolute z-10 w-64 md:w-104 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
-                    <form action="" class="space-y-4 px-4 py-6">
-                        <div>
-                            <textarea name="post_comment" id="" cols="30" rows="4" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Go Ahead, share your thoughts"></textarea>
-                        </div>
-                        <div class="flex flex-col md:flex-row items-center md:space-x-3">
-                            <button type="button" class="bg-blue flex items-center justify-center w-full md:w-1/2 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
-                                <span>Post Comment</span>
-                            </button>
-                            <button type="button" class="flex items-center justify-center w-full md:w-32 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3 mt-2 md:mt-0">
-                                <svg class="text-gray-600 w-4 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                                  </svg>
-                                <span class="ml-1">Attach</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                @admin
+                    <div
+                        x-cloak
+                        x-show.transition.origin.top.left.duration.150ms="isOpen"
+                        @click.away="isOpen = false"
+                        @keydown.escape.window = "isOpen = false"
+                        class="absolute z-10 w-64 md:w-104 text-left font-semibold rounded-xl text-sm bg-white shadow-dialog mt-2">
+                        <form action="" class="space-y-4 px-4 py-6">
+                            <div>
+                                <textarea name="post_comment" id="" cols="30" rows="4" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Go Ahead, share your thoughts"></textarea>
+                            </div>
+                            <div class="flex flex-col md:flex-row items-center md:space-x-3">
+                                <button type="button" class="bg-blue flex items-center justify-center w-full md:w-1/2 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">
+                                    <span>Post Comment</span>
+                                </button>
+                                <button type="button" class="flex items-center justify-center w-full md:w-32 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3 mt-2 md:mt-0">
+                                    <svg class="text-gray-600 w-4 transform -rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                    </svg>
+                                    <span class="ml-1">Attach</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @endadmin
             </div>
             @auth
                 @if (auth()->user()->isAdmin())

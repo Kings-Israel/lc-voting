@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Idea;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,7 +24,7 @@ class EditIdeaTest extends TestCase
         $idea = Idea::factory()->create(['user_id' => $user->id]);
         $this->actingAs($user)
             ->get(route('idea.show', $idea))
-            ->assertSeeLivewire('edit-idea');
+            ->assertSeeLivewire(EditIdea::class);
     }
 
     public function test_does_not_shows_edit_idea_component_when_user_user_does_not_have_authorization()
@@ -32,7 +33,7 @@ class EditIdeaTest extends TestCase
         $idea = Idea::factory()->create();
         $this->actingAs($user)
             ->get(route('idea.show', $idea))
-            ->assertSeeDontLivewire('edit-idea');
+            ->assertDontSeeLivewire(EditIdea::class);
     }
 
     public function test_create_idea_form_validation_works()
@@ -72,7 +73,7 @@ class EditIdeaTest extends TestCase
 
         $this->assertDatabaseHas('ideas', [
             'title' => 'My Edited Idea',
-            'category' => $categoryTwo->id,
+            'category_id' => $categoryTwo->id,
             'description' => 'Description for my edited idea'
         ]);
     }
