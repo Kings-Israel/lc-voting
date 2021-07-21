@@ -23,7 +23,7 @@ class MarkIdeaAsNotSpam extends Component
         $this->idea->spam_reports = 0;
         $this->idea->save();
 
-        $this->emit('ideaMarkedAsNotSpam');
+        $this->emit('ideaMarkedAsNotSpam', 'Spam Coutner Reset!');
     }
 
     public function render()

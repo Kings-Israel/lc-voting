@@ -27,6 +27,16 @@ class Idea extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get all of the comments for the Idea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function sluggable(): array
     {
         return [

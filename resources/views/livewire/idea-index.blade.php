@@ -53,7 +53,7 @@
                     <div>&bull;</div>
                     <div>{{ $idea->category->name }}</div>
                     <div>&bull;</div>
-                    <div class="text-gray-900">3 Comments</div>
+                    <div class="text-gray-900">{{ $idea->comments_count }} comments</div>
                 </div>
                 <div class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">{{ $idea->status->name }}</div>
 

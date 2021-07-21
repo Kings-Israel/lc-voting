@@ -91,6 +91,9 @@
                 </div>
             </div>
         </main>
+        @if (session('success-message'))
+            <x-notification-success :redirect="true" message-to-display="{{ (session('success-message')) }}" />
+        @endif
         @livewireScripts
     </body>
 </html>
