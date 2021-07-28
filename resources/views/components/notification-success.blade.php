@@ -40,6 +40,9 @@
             Livewire.on('commentAdded', (message) => {
                 showNotification(message)
             })
+            Livewire.on('commentUpdated', (message) => {
+                showNotification(message)
+            })
         @endif
     "
     class="z-10 flex justify-between max-w-xs sm:max-w-sm w-full fixed bottom-0 right-0 bg-white rounded-xl shadow-lg border px-4 py-5 mx-2 sm:mx-6 my-8">
