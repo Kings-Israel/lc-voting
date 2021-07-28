@@ -39,7 +39,7 @@
     </div> {{-- End Ideas container --}}
 
     <div class="my-8">
-        {{-- {{ $ideas->links() }} --}}
-        {{ $ideas->appends(request()->query())->links() }}
+        {{ $ideas->links() }}
+        {{-- {{ $ideas->appends(request()->query())->links() }} --}}
     </div>
 </div>
