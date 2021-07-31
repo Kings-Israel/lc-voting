@@ -8,7 +8,7 @@
         $nextTick(() => $refs.title.focus())
     "
     x-init="
-            window.livewire.on('ideaUpdated', () => {
+            Livewire.on('ideaUpdated', () => {
                 isOpen = false
             })
         "
