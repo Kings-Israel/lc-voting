@@ -8,6 +8,11 @@
         <div class="md:mx-4 w-full">
 
             <div class="text-gray-600">
+                @admin
+                    @if ($comment->spam_reports > 0)
+                        <div class="text-red mb-2">Spam Reports: {{ $comment->spam_reports }}</div>
+                    @endif
+                @endadmin
                 {{ $comment->body }}
             </div>
 
@@ -21,48 +26,76 @@
                     @endif
                     <div>{{ $comment->created_at->diffForHumans() }}</div>
                 </div>
-                <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
-                    <div class="relative">
-                        <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
-                            <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" >
-                        </button>
-                        <ul
-                            x-cloak
-                            x-show.transition.origin.top.left.duration.150ms="isOpen"
-                            @click.away="isOpen = false"
-                            @keydown.escape.window = "isOpen = false"
-                            class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 text-left md:ml-8 top-8 md:top-6 right-0 md:left-0"
-                        >
-                            @can('update', $comment)
+                @auth
+
+                    <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                        <div class="relative">
+                            <button class="relative bg-gray-100 hover:bg-gray-200 transition duration-150 ease-in rounded-full border h-7 py-2 px-3" @click="isOpen = !isOpen">
+                                <img class="w-7 -my-5" src="{{ asset('img/three-dots.svg') }}" alt="" >
+                            </button>
+                            <ul
+                                x-cloak
+                                x-show.transition.origin.top.left.duration.150ms="isOpen"
+                                @click.away="isOpen = false"
+                                @keydown.escape.window = "isOpen = false"
+                                class="absolute w-44 font-semibold bg-white shadow-dialog rounded-xl py-3 z-10 text-left md:ml-8 top-8 md:top-6 right-0 md:left-0"
+                            >
+                                @can('update', $comment)
+                                    <li>
+                                        <a
+                                        @click.prevent="
+                                            isOpen = false
+                                            Livewire.emit('setEditComment', {{ $comment->id }})
+                                        "
+                                        href="#"
+                                        class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                            Edit Comment
+                                        </a>
+                                    </li>
+                                @endcan
+                                @can('delete', $comment)
+                                    <li>
+                                        <a
+                                        @click.prevent="
+                                            isOpen = false
+                                            Livewire.emit('setDeleteComment', {{ $comment->id }})
+                                        "
+                                        href="#"
+                                        class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                            Delete Comment
+                                        </a>
+                                    </li>
+                                @endcan
                                 <li>
                                     <a
                                     @click.prevent="
                                         isOpen = false
-                                        Livewire.emit('setEditComment', {{ $comment->id }})
+                                        Livewire.emit('setMarkAsSpamComment', {{ $comment->id }})
                                     "
                                     href="#"
                                     class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                        Edit Comment
+                                        Mark As Spam
                                     </a>
                                 </li>
-                            @endcan
-                            @can('delete', $comment)
-                                <li>
-                                    <a
-                                    @click.prevent="
-                                        isOpen = false
-                                        Livewire.emit('setDeleteComment', {{ $comment->id }})
-                                    "
-                                    href="#"
-                                    class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
-                                        Delete Comment
-                                    </a>
-                                </li>
-                            @endcan
-                            <li><a href="#" class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">Mark As Spam</a></li>
-                        </ul>
+                                @admin
+                                    @if ($comment->spam_reports > 0)
+                                        <li>
+                                            <a
+                                            @click.prevent="
+                                                isOpen = false
+                                                Livewire.emit('setMarkAsNotSpamComment', {{ $comment->id }})
+                                            "
+                                            href="#"
+                                            class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3">
+                                                Mark As NOT Spam
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endadmin
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endauth
             </div>
         </div>
 

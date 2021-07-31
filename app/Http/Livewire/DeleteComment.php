@@ -8,7 +8,7 @@ use Illuminate\Http\Response as HttpResponse;
 
 class DeleteComment extends Component
 {
-    public Comment $comment;
+    public ?Comment $comment;
 
     protected $listeners = ['setDeleteComment'];
 
@@ -26,6 +26,7 @@ class DeleteComment extends Component
         }
 
         Comment::destroy($this->comment->id);
+        $this->comment = null;
 
         $this->emit('commentDeleted', 'Comment was Successfully Deleted');
     }
