@@ -10,7 +10,7 @@
                 const firstComment = document.querySelector('.comment-container:first-child')
                 firstComment.scrollIntoView({ behavior: 'smooth'})
             }
-            if(message.updateQueue[0].payload.event === 'commentAdded' && message.component.fingerprint.name === 'idea-comments') {
+            if((message.updateQueue[0].payload.event === 'commentAdded' || message.updateQueue[0].payload.event === 'statusUpdated') && message.component.fingerprint.name === 'idea-comments') {
                 const lastComment = document.querySelector('.comment-container:last-child')
                 lastComment.scrollIntoView({ behavior: 'smooth'})
                 lastComment.classList.add('bg-green-50')
@@ -42,7 +42,7 @@
             @auth
                 <form action="" wire:submit.prevent="addComment" class="space-y-4 px-4 py-6">
                     <div>
-                        <textarea wire:model="comment" x-ref="comment" name="post_comment" id="" cols="30" rows="4" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Go Ahead, share your thoughts"></textarea>
+                        <textarea wire:model="comment" x-ref="comment" name="post_comment" cols="30" rows="4" class="w-full text-sm bg-gray-100 rounded-xl placeholder-gray-900 border-none px-4 py-2" placeholder="Go Ahead, share your thoughts"></textarea>
                     </div>
                     <div class="flex flex-col md:flex-row items-center md:space-x-3">
                         <button type="submit" class="bg-blue flex items-center justify-center w-full md:w-1/2 text-sm text-xs bg-gray-200 font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-3 text-white">

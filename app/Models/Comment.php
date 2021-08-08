@@ -31,4 +31,14 @@ class Comment extends Model
     {
         return $this->belongsTo(Idea::class);
     }
+
+    /**
+     * Get the status that owns the Comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
