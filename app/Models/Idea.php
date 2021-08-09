@@ -71,7 +71,7 @@ class Idea extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function votes(): BelongsToMany
+    public function votes()
     {
         return $this->belongsToMany(User::class, 'votes');
     }

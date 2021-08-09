@@ -27,7 +27,7 @@ class Comment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function idea(): BelongsTo
+    public function idea()
     {
         return $this->belongsTo(Idea::class);
     }
