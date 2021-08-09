@@ -33,6 +33,7 @@
                 @if (Route::has('login'))
                     <div class="top-0 right-0 px-6 py-4">
                         @auth
+                        <div class="flex items-center">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
@@ -42,6 +43,89 @@
                                     {{ __('Log Out') }}
                                 </a>
                             </form>
+                            <div x-data="{isOpen : false}" class="relative">
+                                <button @click="isOpen = !isOpen">
+                                    <svg class="h-8 w-8 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                                      </svg>
+                                      <div class="absolute rounded-full bg-red text-white text-xxs w-6 h-6 flex justify-center items-center border-2 -top-1 -right-1">
+                                          8
+                                      </div>
+                                </button>
+                                <ul
+                                    class="absolute w-76 md:w-96 text-left text-gray-700 text-sm bg-white shadow-dialog rounded-xl max-h-128 overflow-y-auto z-10 -right-28 md:-right-12"
+                                    x-cloak
+                                    x-show.transition.origin.top="isOpen"
+                                    @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
+                                >
+                                    <li>
+                                        <a
+                                            href="#"
+                                            @click.prevent="isOpen = false"
+                                            class="flex hover:bg-gray-100 transition duration-150 ease-in px-5 py-3"
+                                        >
+                                            <img src="https://www.gravatar.comm/000000000000000000" alt="avatar" class="rounded-xl w-10 h-10">
+                                            <div class="ml-4">
+                                                <div class="line-clamp-6">
+                                                    <span class="font-semibold">Kings</span> commented on
+                                                    <span class="font-semibold">This is my idea</span>
+                                                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem assumenda nam nostrum dicta, consectetur sunt! Odio autem iste magnam eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores eos unde obcaecati assumenda repellendus sequi voluptatum odit! Eum qui expedita veniam fugiat assumenda labore neque, est aut error ex at. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae itaque deleniti neque, enim ipsum eveniet veniam soluta culpa quia voluptatum molestias eum dicta quaerat dolorem quis. Voluptates est magni aspernatur, sint ex, tenetur quasi velit eligendi fugiat libero exercitationem dolore!</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            @click.prevent="isOpen = false"
+                                            class="flex hover:bg-gray-100 transition duration-150 ease-in px-5 py-3"
+                                        >
+                                            <img src="https://www.gravatar.comm/000000000000000000" alt="avatar" class="rounded-xl w-10 h-10">
+                                            <div class="ml-4">
+                                                <div class="line-clamp-6">
+                                                    <span class="font-semibold">Kings</span> commented on
+                                                    <span class="font-semibold">This is my idea</span>
+                                                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem assumenda nam nostrum dicta, consectetur sunt! Odio autem iste magnam eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores eos unde obcaecati assumenda repellendus sequi voluptatum odit! Eum qui expedita veniam fugiat assumenda labore neque, est aut error ex at. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            @click.prevent="isOpen = false"
+                                            class="flex hover:bg-gray-100 transition duration-150 ease-in px-5 py-3"
+                                        >
+                                            <img src="https://www.gravatar.comm/000000000000000000" alt="avatar" class="rounded-xl w-10 h-10">
+                                            <div class="ml-4">
+                                                <div class="line-clamp-6">
+                                                    <span class="font-semibold">Kings</span> commented on
+                                                    <span class="font-semibold">This is my idea</span>
+                                                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem assumenda nam nostrum dicta, consectetur sunt! Odio autem iste magnam eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores eos unde obcaecati assumenda repellendus sequi voluptatum odit! Eum qui expedita veniam fugiat assumenda.</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            @click.prevent="isOpen = false"
+                                            class="flex hover:bg-gray-100 transition duration-150 ease-in px-5 py-3"
+                                        >
+                                            <img src="https://www.gravatar.comm/000000000000000000" alt="avatar" class="rounded-xl w-10 h-10">
+                                            <div class="ml-4">
+                                                <div class="line-clamp-6">
+                                                    <span class="font-semibold">Kings</span> commented on
+                                                    <span class="font-semibold">This is my idea</span>
+                                                    <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem assumenda nam nostrum dicta, consectetur sunt! Odio autem iste magnam eum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores eos unde obcaecati assumenda repellendus sequi voluptatum odit! Eum qui expedita veniam fugiat assumenda labore neque, est aut error ex at. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         @else
                             <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
