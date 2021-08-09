@@ -97,6 +97,10 @@
         @if (session('success-message'))
             <x-notification-success :redirect="true" message-to-display="{{ (session('success-message')) }}" />
         @endif
+
+        @if (session('error-message'))
+            <x-notification-success type="error" :redirect="true" message-to-display="{{ (session('success-message')) }}" />
+        @endif
         @livewireScripts
     </body>
 </html>

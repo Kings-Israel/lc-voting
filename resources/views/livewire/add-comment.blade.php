@@ -6,11 +6,14 @@
         })
 
         Livewire.hook('message.processed', (message, component) => {
+            {{-- Pagination --}}
             if(['gotoPage', 'previousPage', 'nextPage'].includes(message.updateQueue[0].method)) {
                 const firstComment = document.querySelector('.comment-container:first-child')
                 firstComment.scrollIntoView({ behavior: 'smooth'})
             }
-            if((message.updateQueue[0].payload.event === 'commentAdded' || message.updateQueue[0].payload.event === 'statusUpdated') && message.component.fingerprint.name === 'idea-comments') {
+
+            {{-- Adding Comment --}}
+            if(['commentAdded', 'statusUpdated'].includes(message.updateQueue[0].payload.event) && message.component.fingerprint.name === 'idea-comments') {
                 const lastComment = document.querySelector('.comment-container:last-child')
                 lastComment.scrollIntoView({ behavior: 'smooth'})
                 lastComment.classList.add('bg-green-50')
@@ -19,6 +22,15 @@
                 }, 5000)
             }
         })
+
+        @if(session('scrollToComment'))
+            const commentToScrollTo = document.querySelector('#comment-{{ session('scrollToComment') }}')
+            commentToScollTo.scrollIntoView({ behavior: 'smooth'})
+            commentToScollTo.classList.add('bg-green-50')
+            setTimeout(() => {
+                commentToScollTo.classList.remove('bg-green-50')
+            }, 5000)
+        @endif
     "
     class="relative"
 >

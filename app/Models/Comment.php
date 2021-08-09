@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $perPage = 5;
+    protected $perPage = 4;
 
     /**
      * Get the user that owns the Comment
