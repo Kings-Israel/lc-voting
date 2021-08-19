@@ -4,16 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Exceptions\DuplicateVoteException;
 use App\Exceptions\VoteNotFoundException;
+use App\Http\Livewire\Traits\WithAuthRedirects;
 use App\Models\Idea;
 use Livewire\Component;
 
 class IdeaShow extends Component
 {
+    use WithAuthRedirects;
+
     public $idea;
     public $votesCount;
     public $hasVoted;
 
-    protected $listeners = ['statusUpdated', 'ideaUpdated', 'ideaMarkedAsSpam', 'ideaMarkedAsNotSpam', 'commentAdded', 'commentDeleted'];
+    protected $listeners = ['statusUpdated', 'statusUpdatedError', 'ideaUpdated', 'ideaMarkedAsSpam', 'ideaMarkedAsNotSpam', 'commentAdded', 'commentDeleted'];
 
     public function mount(Idea $idea, $votesCount)
     {
@@ -23,6 +26,11 @@ class IdeaShow extends Component
     }
 
     public function statusUpdated()
+    {
+        $this->idea->refresh();
+    }
+
+    public function statusUpdatedError()
     {
         $this->idea->refresh();
     }
@@ -54,8 +62,8 @@ class IdeaShow extends Component
 
     public function vote()
     {
-        if(! auth()->check()){
-            return redirect(route('login'));
+        if(auth()->guest()){
+            return $this->redirectToLogin();
         }
 
         if ($this->hasVoted) {

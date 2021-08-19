@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Exceptions\DuplicateVoteException;
 use App\Exceptions\VoteNotFoundException;
+use App\Http\Livewire\Traits\WithAuthRedirects;
 use Livewire\Component;
 use App\Models\Idea;
 
 class IdeaIndex extends Component
 {
+    use WithAuthRedirects;
+
     public $idea;
     public $votesCount;
     public $hasVoted;
@@ -22,8 +25,8 @@ class IdeaIndex extends Component
 
     public function vote()
     {
-        if(! auth()->check()){
-            return redirect(route('login'));
+        if(auth()->guest()){
+            return $this->redirectToLogin();
         }
 
         if ($this->hasVoted) {

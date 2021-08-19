@@ -1,4 +1,7 @@
-<div x-data="{isOpen : false}" class="relative">
+<div
+    wire:poll="getNotificationsCount"
+    x-data="{isOpen : false}"
+    class="relative">
     <button @click="
             isOpen = !isOpen
             if(isOpen) {
@@ -9,7 +12,7 @@
             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
           </svg>
           @if ($notificationCount)
-            <div class="absolute rounded-full bg-red text-white text-xxs w-6 h-6 flex justify-center items-center border-2 -top-1 -right-1">
+            <div class="absolute rounded-full bg-red text-white text-xs w-6 h-6 flex justify-center items-center border-2 -top-1 -right-1">
                   {{ $notificationCount }}
             </div>
           @endif
